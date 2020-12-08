@@ -20,6 +20,6 @@ provider "aws" {
 # @param resource_type is the type of the infrastructure defined. the prefix of this variable defines which provider it belongs to (in this case, the 'aws' provider)
 # @param resource name is the name of the resource
 resource "aws_instance" "example" {
-  ami           = "ami-830c94e3" # ami is the amazon machine image of the ec2 instance (in this case its a ubuntu instance)
-  instance_type = "t2.micro"     # a free teir image
+  ami           = "ami-08d70e59c07c61a3a" # ami is the amazon machine image of the ec2 instance (in this case its a ubuntu instance)
+  instance_type = "t2.micro"              # a free teir image
 }
