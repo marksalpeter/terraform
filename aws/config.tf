@@ -13,13 +13,18 @@ terraform {
 # note: it is possible to use multiple providers together in the same config file, eg. passing an id of an aws instance to datadog
 provider "aws" {
   profile = "default" # default uses the config from the 'aws cli'. It's strongly reccomended to never store hard coded credentials in a terraform config file.
-  region  = "us-west-2"
+  region  = var.region
 }
 
 # resource blocks define a specific piece of infastructure (EC2, Heroku application, etc)
 # @param resource_type is the type of the infrastructure defined. the prefix of this variable defines which provider it belongs to (in this case, the 'aws' provider)
 # @param resource name is the name of the resource
 resource "aws_instance" "example" {
-  ami           = "ami-08d70e59c07c61a3a" # ami is the amazon machine image of the ec2 instance (in this case its a ubuntu instance)
-  instance_type = "t2.micro"              # a free teir image
+  ami           = var.amis[var.region] # ami is the amazon machine image of the ec2 instance (in this case its a ubuntu instance)
+  instance_type = "t2.micro"           # a free teir image
+}
+
+# output prints out information to the screen when `terraform apply` is called
+output "ami" {
+  value = aws_instance.example.ami # print the ami for the cooresponding region
 }
