@@ -24,7 +24,18 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"           # a free teir image
 }
 
+# aws_eip ip creates an elastic ip that it assigns to the 'example' instance
+resource "aws_eip" "ip" {
+  vpc      = true
+  instance = aws_instance.example.id
+}
+
 # output prints out information to the screen when `terraform apply` is called
 output "ami" {
   value = aws_instance.example.ami # print the ami for the cooresponding region
+}
+
+# ip prints the public ip of the elastic ip address assigned to the 'example' insatnce when `terraform apply` or `terraform output ip` is run
+output "ip" {
+  value = aws_eip.ip.public_ip
 }
