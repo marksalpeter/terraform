@@ -11,7 +11,7 @@ variable "region" {
 
 # variable amis is a map from the region to our preferred ami in that region
 variable "amis" {
-  description = "a miap of ami's available for each supported region"
+  description = "a map of ami's available for each supported region"
   type        = map(string) # type is implicitly defined by the defauly value, but if no default is present this can enforce the type needed in `terraform.tfvars`
   default = {
     "us-east-1" = "ami-b374d5a5"
